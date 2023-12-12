@@ -22,7 +22,7 @@ def auth_cogs(ctx, database, url_to_redirect):
                 make_log(action_name='login', user_ip=ctx.remote_addr, user_token=row[1], log_level=1,
                          database=database)
                 if not url_to_redirect:
-                    data = database.select('SELECT fqdn FROM cantina_administration.domain WHERE name="olympie"',
+                    data = database.select('SELECT fqdn FROM cantina_administration.domain WHERE name="olympe"', None,
                                            number_of_data=1)
                     resp = make_response(redirect('https://' + data[0] + '/', code=302))
                 else:
@@ -44,7 +44,7 @@ def auth_cogs(ctx, database, url_to_redirect):
     elif ctx.method == 'GET':
         if ctx.cookies.get('token'):
             if not url_to_redirect:
-                data = database.select('''SELECT fqdn FROM cantina_administration.domain WHERE name='olympe' ''',
+                data = database.select('''SELECT fqdn FROM cantina_administration.domain WHERE name='olympe' ''', None,
                                        number_of_data=1)
             else:
                 data = database.select('SELECT fqdn FROM cantina_administration.domain WHERE name=%s',

@@ -3,7 +3,7 @@ from os import path, getcwd
 from flask import Flask, request
 from Cogs.auth import auth_cogs
 from Cogs.home import home_cogs
-from Utils.Database import DataBase
+from cantinaUtils.Database import DataBase 
 
 app = Flask(__name__)
 conf_file = open(path.abspath(getcwd()) + "/config.json", 'r')
@@ -11,7 +11,9 @@ config_data = load(conf_file)
 
 # Connection aux bases de données
 database = DataBase(user=config_data['database'][0]['database_username'],
-                    password=config_data['database'][0]['database_password'], host="localhost", port=3306)
+                    password=config_data['database'][0]['database_password'], 
+                    host=config_data['database'][0]['database_addresse'], 
+                    port=int(config_data['database'][0]['database_port']))
 database.connection()
 
 
